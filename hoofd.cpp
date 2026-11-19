@@ -99,7 +99,7 @@ char getMenuChoice() {
 } // getMenuChoice
 
 int main ( ) {
-    gobord Gobord;
-    Gobord.drukaf ( );
+    gobord gobord;
+    gobord.print ( );
     return 0;
 }//main

@@ -1,7 +1,7 @@
 # eenvoudige makefile
 all: hoofd.o gobord.o
-	g++ -Wall -o hetspel gobord.o hoofd.o
-gobord.o: gobord.cc gobord.h
-	g++ -Wall -c gobord.cc
-hoofd.o: hoofd.cc gobord.h
-	g++ -Wall -c hoofd.cc
+	g++ -Wall -o run gobord.o hoofd.o
+gobord.o: gobord.cpp gobord.h
+	g++ -Wall -c gobord.cpp
+hoofd.o: hoofd.cpp gobord.h
+	g++ -Wall -c hoofd.cpp

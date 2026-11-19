@@ -1,20 +1,20 @@
 // file gobord.h
-class bordvakje {
+class vakje {
     public:
-        char kleur;           //     7 0 1
-        bordvakje* buren[8];  //     6   2
-        bordvakje ( );        //     5 4 3
+        char kleur;       //     7 0 1
+        vakje* buren[8];  //     6   2
+        vakje ( );        //     5 4 3
 };//bordvakje
 
 class gobord {
     private:
-        bordvakje* ingang;
-        int hoogte, breedte;
+        vakje* ingang;
+        int height, width;
         // TODO
     public:
         gobord ( );
         gobord (int hoogte, int breedte);
         ~gobord ( );
-        void drukaf ( );
+        void print ( );
         // TODO
 };//gobord
