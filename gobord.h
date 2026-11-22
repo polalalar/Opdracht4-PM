@@ -9,11 +9,13 @@ class vakje {
 class gobord {
     private:
         vakje* ingang;
-        int height, width;
+        int breedte, hoogte;
         // TODO
     public:
         gobord ( );
         gobord (int hoogte, int breedte);
+        vakje* gobordMaakRij (int breedte);
+        void verbindRijen (vakje* ingangBoven, vakje* ingangOnder);
         ~gobord ( );
         void print ( );
         // TODO
