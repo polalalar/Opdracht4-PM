@@ -138,10 +138,6 @@ void gobord::print ( ) {
     vakje* rijArray[hoogte];
     vakje* hoogteHulp = ingang;
     // beweegt naar beneden door het bord.
-    vakje* gevonden = krijgVakje(1,1);
-    if (gevonden != nullptr) {
-        gevonden->kleur = '0';
-    }
     
     for (int i = 0; i < hoogte; i++) {
         rijArray[i] = hoogteHulp;
