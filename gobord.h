@@ -3,7 +3,7 @@ class vakje {
     public:
         char kleur;       //     7 0 1
         vakje* buren[8];  //     6   2
-        vakje ( );        //     5 4 3
+        vakje ( );  //     5 4 3
 };//bordvakje
 
 class gobord {
@@ -16,6 +16,8 @@ class gobord {
         gobord (int hoogte, int breedte);
         vakje* gobordMaakRij (int breedte);
         void verbindRijen (vakje* ingangBoven, vakje* ingangOnder);
+        void verbindVier (vakje* LinksBoven, vakje* LinksOnder, vakje* RechtsBoven, vakje* RechtsOnder);
+        vakje* krijgVakje (int m, int n);
         ~gobord ( );
         void print ( );
         // TODO
