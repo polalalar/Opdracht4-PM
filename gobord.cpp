@@ -5,7 +5,7 @@ using namespace std;
 
 
 vakje::vakje ( ) {
-    kleur = 'a';
+    kleur = 'l';
     for (int i = 0; i < 8; i++) {
         buren[i] = nullptr;
     }
@@ -83,8 +83,7 @@ void gobord::verbindRijen (vakje* ingangBoven,vakje* ingangOnder) {
         // deze worden nullptr's op de laatste iteratie
         RechtsBovenHulp = RechtsBovenHulp->buren[2];
         RechtsOnderHulp = RechtsOnderHulp->buren[2];
-    }
-
+    } // for
 } // gobord::verbindRijen
 
 void gobord::verbindVier (vakje* LinksBoven, vakje* LinksOnder, vakje* RechtsBoven, vakje* RechtsOnder) {
@@ -97,8 +96,8 @@ void gobord::verbindVier (vakje* LinksBoven, vakje* LinksOnder, vakje* RechtsBov
 } // gobord::verbindVier
 
 void gobord::maakGobord (int nieuweHoogte, int nieuweBreedte) {
-    hoogte = nieuweHoogte;
-    breedte = nieuweBreedte;
+    hoogte = max(1, nieuweHoogte);
+    breedte = max(1, nieuweBreedte);
     vakje* vorigeRijIngang = nullptr;
     for (int i = 0; i < hoogte; i++) {
         vakje* rijPtr = gobordMaakRij(breedte);
@@ -141,10 +140,19 @@ void gobord::print ( ) {
     cout << "goborden zien er mooi uit." << endl;
     vakje* nuRij = ingang;
     vakje* volgendeRij = ingang->buren[4];
+    int index = 0;
+    cout << "  ";
+    for (int i = 0; i<breedte; i++) {
+        cout << i << " ";
+    } // for
+    cout << endl;
+    cout << index << " ";
     printRij(nuRij);
     while (volgendeRij != nullptr) {
+        index++;
         nuRij = volgendeRij;
         volgendeRij = volgendeRij->buren[4];
+        cout << index << " ";
         printRij(nuRij);
     } // while
 } //gobord::print
@@ -152,10 +160,19 @@ void gobord::print ( ) {
 void gobord::printRij (vakje* rij) {
     vakje* vorigVakje = nullptr;
     vakje* nuVakje = rij;
+
     for (int i = 0; i < breedte; i++) {
         vorigVakje = nuVakje;
         nuVakje = nuVakje->buren[2];
-        cout << vorigVakje->kleur;
+        if (vorigVakje->kleur == 'w') {
+            cout << "O ";
+        } // if
+        if (vorigVakje->kleur == 'z') {
+            cout << "X ";
+        } // if
+        if (vorigVakje->kleur == 'l') {
+            cout << ". ";
+        } // if
     } // for
     cout << endl;
 } // gobord::printRij
@@ -178,8 +195,10 @@ vakje* gobord::krijgVakje (int m, int n) {
     for (int i = 0; i < n; i++) {
         vak = vak->buren[2];
     } // for
-
     return vak;
-}
+} // gobord::krijgVakje
 
-// TODO
+void gobord::speelZet(int hoogte, int breedte, char kleur) {
+    vakje* vakje = krijgVakje(hoogte, breedte);
+    vakje->kleur = kleur;
+}// gobord::speelZet

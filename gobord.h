@@ -22,6 +22,7 @@ class gobord {
         void verwijderRij (vakje* rij);
         void printRij (vakje* rij);
         void verwijderGobord ( );
+        void speelZet (int hoogte, int breedte, char kleur);
         void print ( );
         // TODO
 };//gobord

@@ -82,9 +82,6 @@ int readNumber(int max_num = 10000, int min_num = 1) {
         } // if
         kar = cin.get(); // next iteration
     } // while
-    if (num < min_num) {
-        num = min_num;
-    }
     return num;
 } // readNumber
 
@@ -106,6 +103,7 @@ void speelZet (gobord nuGobord) {
     int hoogte = readNumber(nuGobord.hoogte - 1);
     cout << "Geeft de breedte van het vakje" << endl << ">";
     int breedte = readNumber(nuGobord.breedte - 1);
+    nuGobord.speelZet(hoogte, breedte, 'w');
     cout << "Speel een zet op (" << hoogte << "," << breedte << ")" << endl;
 }
 
@@ -130,7 +128,6 @@ int main ( ) {
         cout << "-------------------< Menu >-------------------" << endl;
         cout << "[Z]et, [S]top" << endl;
         choice = getMenuChoice();
-       
         switch (choice) {
         case 'z':
             speelZet(nuGobord);
@@ -140,7 +137,7 @@ int main ( ) {
             break;
         default:
             cout << "Invalid choice of " << choice << endl;
-        }
+        } // switch
         if (stop) { // gebruiker wilt stoppen
             cout << "Weet je zeker dat je wilt stoppen? (J/N)" << endl;
             choice = getMenuChoice();
@@ -151,7 +148,7 @@ int main ( ) {
                 stop = false;
             } // else
         } // if
-    }
+    } // while
     nuGobord.verwijderGobord();
     return 0;
 }//main
