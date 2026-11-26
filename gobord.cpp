@@ -137,7 +137,6 @@ void gobord::verwijderRij (vakje* rij) {
 } // gobord::verwijderRij
 
 void gobord::print ( ) {
-    cout << "goborden zien er mooi uit." << endl;
     vakje* nuRij = ingang;
     vakje* volgendeRij = ingang->buren[4];
     int index = 0;
@@ -200,5 +199,10 @@ vakje* gobord::krijgVakje (int m, int n) {
 
 void gobord::speelZet(int hoogte, int breedte, char kleur) {
     vakje* vakje = krijgVakje(hoogte, breedte);
-    vakje->kleur = kleur;
+    if (vakje->kleur == 'l') {
+        vakje->kleur = kleur;
+    } // if
+    else {
+        cout << "Dit vakje is al bezet!" << endl;
+    }
 }// gobord::speelZet

@@ -104,8 +104,7 @@ void speelZet (gobord nuGobord) {
     cout << "Geeft de breedte van het vakje" << endl << ">";
     int breedte = readNumber(nuGobord.breedte - 1);
     nuGobord.speelZet(hoogte, breedte, 'w');
-    cout << "Speel een zet op (" << hoogte << "," << breedte << ")" << endl;
-}
+} // speelZet
 
 int main ( ) {
     gobord nuGobord;
