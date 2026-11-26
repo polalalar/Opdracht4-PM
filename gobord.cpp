@@ -123,28 +123,26 @@ void gobord::verwijderRij (vakje* rij) {
 
 void gobord::print ( ) {
     cout << "goborden zien er mooi uit." << endl;
-    vakje* rijArray[hoogte];
-    vakje* hoogteHulp = ingang;
-    // beweegt naar beneden door het bord.
-    
-    for (int i = 0; i < hoogte; i++) {
-        rijArray[i] = hoogteHulp;
-        // niet de laatste
-        if (i != hoogte - 1) {
-            hoogteHulp = hoogteHulp->buren[4];
-        } // if
-    } // for
-    hoogteHulp = nullptr;
-    for (int i = 0; i < hoogte; i++) {
-        vakje* ptr = rijArray[i];
-        for (int j = 0; j < breedte; j++) {
-            char kar = ptr->kleur;
-            cout << kar;
-            ptr = ptr->buren[2];
-        } // for
-        cout << endl;
-    } // for
+    vakje* nuRij = ingang;
+    vakje* volgendeRij = ingang->buren[4];
+    printRij(nuRij);
+    while (volgendeRij != nullptr) {
+        nuRij = volgendeRij;
+        volgendeRij = volgendeRij->buren[4];
+        printRij(nuRij);
+    } // while
 } //gobord::print
+
+void gobord::printRij (vakje* rij) {
+    vakje* vorigVakje = nullptr;
+    vakje* nuVakje = rij;
+    for (int i = 0; i < breedte; i++) {
+        vorigVakje = nuVakje;
+        nuVakje = nuVakje->buren[2];
+        cout << vorigVakje->kleur;
+    } // for
+    cout << endl;
+} // gobord::printRij
 
 vakje* gobord::krijgVakje (int m, int n) {
     if (m < 0 || m >= hoogte) {
