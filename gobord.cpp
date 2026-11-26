@@ -204,5 +204,5 @@ void gobord::speelZet(int hoogte, int breedte, char kleur) {
     } // if
     else {
         cout << "Dit vakje is al bezet!" << endl;
-    }
+    } // else
 }// gobord::speelZet
