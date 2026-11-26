@@ -14,19 +14,17 @@ vakje::vakje ( ) {
 gobord::gobord ( ) {
     breedte = 3;
     hoogte = 2;
-    vakje* rijArray[hoogte];
+    vakje* vorigeRijIngang = nullptr;
     for (int i = 0; i < hoogte; i++) {
-        rijArray[i] = gobordMaakRij (breedte);
+        vakje* rijPtr = gobordMaakRij (breedte);
+        if (i == 0) {
+            ingang = rijPtr;
+        } // if
+        else {
+            verbindRijen(vorigeRijIngang,rijPtr);
+        } // else
+        vorigeRijIngang = rijPtr;
     } // for
-    ingang = rijArray[0];
-
-
-    // hoogte -1 omdat je de rij met degene erna verbind en anders
-    // ga je buiten de array
-    for (int i = 0; i < hoogte - 1; i++) {
-        verbindRijen(rijArray[i],rijArray[i+1]);
-    } // for
-    
 }//gobord::gobord
 
 vakje* gobord::gobordMaakRij (int breedte) {
