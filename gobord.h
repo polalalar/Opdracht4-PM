@@ -18,6 +18,7 @@ class gobord {
         void verbindRijen (vakje* ingangBoven, vakje* ingangOnder);
         void verbindVier (vakje* LinksBoven, vakje* LinksOnder, vakje* RechtsBoven, vakje* RechtsOnder);
         vakje* krijgVakje (int m, int n);
+        void verwijderRij (vakje* rij);
         ~gobord ( );
         void print ( );
         // TODO

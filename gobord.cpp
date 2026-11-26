@@ -101,35 +101,25 @@ gobord::gobord (int hoogte, int breedte) {
 
 gobord::~gobord ( ) {
     cout << "CLEAN UP" << endl;
-    vakje* rijArray[hoogte];
-    vakje* hoogteHulp = ingang;
-    // beweegt naar beneden door het bord.
-    for (int i = 0; i < hoogte; i++) {
-        rijArray[i] = hoogteHulp;
-        // niet de laatste
-        if (i != hoogte - 1) {
-            hoogteHulp = hoogteHulp->buren[4];
-        } // if
-    } // for
-    hoogteHulp = nullptr;
+    vakje* nuRij = ingang;
+    vakje* volgendeRij = ingang->buren[4];
+    verwijderRij(nuRij);
+    while (volgendeRij != nullptr) {
+        nuRij = volgendeRij;
+        volgendeRij = volgendeRij->buren[4];
+        verwijderRij(nuRij);;
+    } // while
+} //gobord::~gobord
 
-    for (int i = 0; i < hoogte; i++) {
-        vakje* rijIngang = rijArray[i];
-        vakje* alleVakjesInRij[breedte];
-        // beweegt naar rechts
-        for (int j = 0; j < breedte; j++) {
-            alleVakjesInRij[j] = rijIngang;
-            rijIngang = rijIngang->buren[2];
-        } // for
-        rijIngang = nullptr;
-        // delete alle vakjes
-        for (int j = 0; j < breedte; j++) {
-            delete alleVakjesInRij[j];
-        } // for
+void gobord::verwijderRij (vakje* rij) {
+    vakje* vorigVakje = nullptr;
+    vakje* nuVakje = rij;
+    for (int i = 0; i < breedte; i++) {
+        vorigVakje = nuVakje;
+        nuVakje = nuVakje->buren[2];
+        delete vorigVakje;
     } // for
-    
-    // geen delete ingang nodig omdat die hierboven al verwijderd wordt.
-}//gobord::~gobord
+} // gobord::verwijderRij
 
 void gobord::print ( ) {
     cout << "goborden zien er mooi uit." << endl;
