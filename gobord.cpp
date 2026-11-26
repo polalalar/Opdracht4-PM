@@ -12,19 +12,20 @@ vakje::vakje ( ) {
 }
 
 gobord::gobord ( ) {
-    breedte = 3;
-    hoogte = 2;
-    vakje* vorigeRijIngang = nullptr;
-    for (int i = 0; i < hoogte; i++) {
-        vakje* rijPtr = gobordMaakRij (breedte);
-        if (i == 0) {
-            ingang = rijPtr;
-        } // if
-        else {
-            verbindRijen(vorigeRijIngang,rijPtr);
-        } // else
-        vorigeRijIngang = rijPtr;
-    } // for
+    speeltTegenRobot = false;
+    // breedte = 3;
+    // hoogte = 2;
+    // vakje* vorigeRijIngang = nullptr;
+    // for (int i = 0; i < hoogte; i++) {
+    //     vakje* rijPtr = gobordMaakRij (breedte);
+    //     if (i == 0) {
+    //         ingang = rijPtr;
+    //     } // if
+    //     else {
+    //         verbindRijen(vorigeRijIngang,rijPtr);
+    //     } // else
+    //     vorigeRijIngang = rijPtr;
+    // } // for
 }//gobord::gobord
 
 vakje* gobord::gobordMaakRij (int breedte) {
@@ -95,12 +96,27 @@ void gobord::verbindVier (vakje* LinksBoven, vakje* LinksOnder, vakje* RechtsBov
     LinksOnder->buren[1] = RechtsBoven;
 } // gobord::verbindVier
 
-gobord::gobord (int hoogte, int breedte) {
-    // TODO
-} // gobord::gobord
+void gobord::maakGobord (int nieuweHoogte, int nieuweBreedte) {
+    hoogte = nieuweHoogte;
+    breedte = nieuweBreedte;
+    vakje* vorigeRijIngang = nullptr;
+    for (int i = 0; i < hoogte; i++) {
+        vakje* rijPtr = gobordMaakRij(breedte);
+        if (i == 0) {
+            ingang = rijPtr;
+        } // if
+        else {
+            verbindRijen(vorigeRijIngang,rijPtr);
+        } // else
+        vorigeRijIngang = rijPtr;
+    } // for
+} // gobord::maakGobord
 
-gobord::~gobord ( ) {
+void gobord::verwijderGobord ( ) {
     cout << "CLEAN UP" << endl;
+    if (ingang == nullptr) {
+        return;
+    } // if
     vakje* nuRij = ingang;
     vakje* volgendeRij = ingang->buren[4];
     verwijderRij(nuRij);
@@ -109,7 +125,7 @@ gobord::~gobord ( ) {
         volgendeRij = volgendeRij->buren[4];
         verwijderRij(nuRij);;
     } // while
-} //gobord::~gobord
+} //gobord::verwijderGobord
 
 void gobord::verwijderRij (vakje* rij) {
     vakje* vorigVakje = nullptr;

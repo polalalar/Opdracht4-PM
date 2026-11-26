@@ -59,7 +59,7 @@ bool isLetter(char kar) {
 } // isLetter
 
 // Reads a number from the user, with a maximum number
-int readNumber(int max_num = 10000) {
+int readNumber(int max_num = 10000, int min_num = 1) {
     int num = 0; // number to return
     int max_num_reached = false; // flag to stop after reaching max_num
     int next_num = 0; // next number to check if it exceeds max_num
@@ -82,6 +82,9 @@ int readNumber(int max_num = 10000) {
         } // if
         kar = cin.get(); // next iteration
     } // while
+    if (num < min_num) {
+        num = min_num;
+    }
     return num;
 } // readNumber
 
@@ -98,8 +101,57 @@ char getMenuChoice() {
     return choice;
 } // getMenuChoice
 
+void speelZet (gobord nuGobord) {
+    cout << "Geef de hoogte van het vakje" << endl << ">";
+    int hoogte = readNumber(nuGobord.hoogte - 1);
+    cout << "Geeft de breedte van het vakje" << endl << ">";
+    int breedte = readNumber(nuGobord.breedte - 1);
+    cout << "Speel een zet op (" << hoogte << "," << breedte << ")" << endl;
+}
+
 int main ( ) {
-    gobord gobord;
-    gobord.print ( );
+    gobord nuGobord;
+    int nieuweHoogte = 0;
+    int nieuweBreedte = 0;
+    cout << "Hoe hoog is het bord?" << endl << ">";
+    nieuweHoogte = readNumber();
+    cout << "Hoe breed is het bord?" << endl << ">";
+    nieuweBreedte = readNumber();
+    nuGobord.maakGobord(nieuweHoogte,nieuweBreedte);
+    cout << "Wil je tegen een computer spelen (J/N)?" << endl << ">";
+    char choice = getMenuChoice();
+    if (choice == 'j') {
+        nuGobord.speeltTegenRobot = true;
+    }
+    bool stop = false; // flag om het programma te stoppen
+
+    while (true) {
+        nuGobord.print( );
+        cout << "-------------------< Menu >-------------------" << endl;
+        cout << "[Z]et, [S]top" << endl;
+        choice = getMenuChoice();
+       
+        switch (choice) {
+        case 'z':
+            speelZet(nuGobord);
+            break;
+        case 's':
+            stop = true;
+            break;
+        default:
+            cout << "Invalid choice of " << choice << endl;
+        }
+        if (stop) { // gebruiker wilt stoppen
+            cout << "Weet je zeker dat je wilt stoppen? (J/N)" << endl;
+            choice = getMenuChoice();
+            if (choice == 'j') {
+                break;
+            } // if
+            else {
+                stop = false;
+            } // else
+        } // if
+    }
+    nuGobord.verwijderGobord();
     return 0;
 }//main

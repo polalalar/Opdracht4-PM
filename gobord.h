@@ -9,18 +9,19 @@ class vakje {
 class gobord {
     private:
         vakje* ingang;
-        int breedte, hoogte;
         // TODO
     public:
+        int breedte, hoogte;
+        bool speeltTegenRobot;
         gobord ( );
-        gobord (int hoogte, int breedte);
+        void maakGobord (int hoogte, int breedte);
         vakje* gobordMaakRij (int breedte);
         void verbindRijen (vakje* ingangBoven, vakje* ingangOnder);
         void verbindVier (vakje* LinksBoven, vakje* LinksOnder, vakje* RechtsBoven, vakje* RechtsOnder);
         vakje* krijgVakje (int m, int n);
         void verwijderRij (vakje* rij);
         void printRij (vakje* rij);
-        ~gobord ( );
+        void verwijderGobord ( );
         void print ( );
         // TODO
 };//gobord
